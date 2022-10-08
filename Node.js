@@ -22,4 +22,12 @@ class Node{
     set right(data) {
         this._right = data;
     }
+
+    get data() {
+        return this._data;
+    }
+
+    set data(value) {
+        this._data = value;
+    }
 }
