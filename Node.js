@@ -3,7 +3,7 @@ class Node{
 
     data;
     left = null;
-    left = null;
+    right = null;
 
     constructor(data) {
         this.data = data;
