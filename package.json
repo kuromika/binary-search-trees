@@ -1,0 +1,32 @@
+{
+  "name": "@mika-alpha/binary-search-trees",
+  "version": "1.0.0",
+  "description": "balanced binary search trees + nodes",
+  "main": "Tree.js",
+  "type" :"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mika-alpha/binary-search-trees.git"
+  },
+  "keywords": [
+    "binary",
+    "trees",
+    "binary",
+    "search",
+    "tree",
+    "balanced",
+    "tree"
+  ],
+  "author": "mika-alpha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mika-alpha/binary-search-trees/issues"
+  },
+  "homepage": "https://github.com/mika-alpha/binary-search-trees#readme",
+  "dependencies": {
+    "@mika-alpha/merge-sort": "^1.0.0"
+  }
+}

@@ -1,0 +1,1 @@
+declare module '@mika-alpha/merge-sort';
