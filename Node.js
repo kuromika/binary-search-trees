@@ -1,10 +1,12 @@
 
 class Node{
 
+    data;
+    left = null;
+    left = null;
+
     constructor(data) {
         this.data = data;
-        this.left = null;
-        this.right = null;
     }
 
     get left() {
@@ -31,3 +33,5 @@ class Node{
         this._data = value;
     }
 }
+
+
