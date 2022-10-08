@@ -7,7 +7,8 @@ class Tree{
 
     constructor(array) {
         // create a set from the sorted param array, then spread it into an array
-        this.root = buildTree([...new Set(mergeSort(array))], 0, array.length-1);
+        const sortedArray = [...new Set(mergeSort(array))];
+        this.root = buildTree(sortedArray, 0, sortedArray.length-1);
     }
 
     get root() {
@@ -45,6 +46,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 }
 
-const testTree = new Tree([1,2,3,4,5,6,7,8,9]);
+const testTree = new Tree([2,3,4,1,2,3,5,6,7]);
 
 prettyPrint(testTree.root);
