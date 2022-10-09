@@ -1,7 +1,7 @@
 import mergeSort from "@mika-alpha/merge-sort";
 import Node from './Node.js';
 
-class Tree{
+class Tree {
 
     root;
 
@@ -23,23 +23,24 @@ class Tree{
             return null;
         } else if (node.data === value) {
             return node;
-        } 
+        }
 
         if (node.data > value) {
             return this.find(value, node.left);
         } else if (node.data < value) {
             return this.find(value, node.right);
         }
-        
+
     }
 
     insert(value) {
         if (this.root === null) {
             this.root = new Node(value);
 
-        } else {
+        } else if (!this.find(value)) {
             this._insert(value, this.root);
         }
+
     }
 
     _insert(value, current) {
@@ -52,15 +53,29 @@ class Tree{
             current.right = this._insert(value, current.right);
         }
         return current;
+
+    }
+
+
+    _delete(value, current = this.root) {
+
+    }
+
+    findMin(current) {
+        if (current.left === null) {
+            return current;
+        } else {
+            return this.findMin(current.left);
+        }
     }
 }
 
 function buildTree(array) {
-    
+
     // create a set from the sorted param array, then spread it into an array
     const sortedArray = [...new Set(mergeSort(array))];
 
-    return _buildTree(sortedArray, 0, sortedArray.length-1);
+    return _buildTree(sortedArray, 0, sortedArray.length - 1);
 }
 
 function _buildTree(array, start, end) {
@@ -79,16 +94,18 @@ function _buildTree(array, start, end) {
 
 // function from The Odin Project
 const prettyPrint = (node, prefix = '', isLeft = true) => {
-  if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-  }
-  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-  if (node.left !== null) {
-    prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-  }
+    if (node.right !== null) {
+        prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+    }
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+    if (node.left !== null) {
+        prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+    }
 }
 
-const testTree = new Tree([]);
+const testTree = new Tree([2, 3]);
+
+testTree._delete(3);
 
 prettyPrint(testTree.root);
 
