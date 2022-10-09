@@ -18,6 +18,7 @@ class Tree{
     }
 
     find(value, node = this.root) {
+
         if (node === null) {
             return null;
         } else if (node.data === value) {
@@ -32,6 +33,26 @@ class Tree{
         
     }
 
+    insert(value) {
+        if (this.root === null) {
+            this.root = new Node(value);
+
+        } else {
+            this._insert(value, this.root);
+        }
+    }
+
+    _insert(value, current) {
+
+        if (current === null) {
+            return new Node(value);
+        } else if (value < current.data) {
+            current.left = this._insert(value, current.left);
+        } else {
+            current.right = this._insert(value, current.right);
+        }
+        return current;
+    }
 }
 
 function buildTree(array) {
@@ -67,8 +88,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 }
 
-const testTree = new Tree([2,3,4,1,2,3,5,6,7]);
+const testTree = new Tree([]);
 
 prettyPrint(testTree.root);
 
-console.log(testTree.find(3));
