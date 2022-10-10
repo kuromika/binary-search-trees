@@ -203,11 +203,32 @@ class Tree {
         } else {
             cb(root);
         }
-
         return cb;
 
     }
 
+    height(root = this.root) {
+
+        if (root === null) {
+            return -1;
+        }
+        const leftHeight = this.height(root.left);
+        const rightHeight = this.height(root.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+        
+    }
+
+    depth(data, root = this.root) {
+        if (root === null || root.data === data) {
+            return 0;
+        }
+        if (data < root.data) {
+            return 1 + this.depth(data, root.left);
+        } else if (data > root.data) {
+            return 1 + this.depth(data, root.right);
+        }
+    }
 
 }
 
@@ -245,6 +266,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 const testTree = new Tree([1, 3, 4, 5, 8, 2]);
+
 
 prettyPrint(testTree.root);
 
