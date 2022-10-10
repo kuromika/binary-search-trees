@@ -280,9 +280,28 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     }
 }
 
-const testTree = new Tree([5, 4, 10, 20, 25, 15, 3, 2, 6]);
 
-console.log(testTree.isBalanced());
+function test() {
 
-prettyPrint(testTree.root);
+    const testTree = new Tree([5, 4, 10, 20, 25, 15, 3, 2, 6]);
+
+    console.log('is balanced: ' + testTree.isBalanced());
+    console.log('pre: ' + testTree.preorder());
+    console.log('in: ' + testTree.inorder());
+    console.log('post: ' + testTree.postorder());
+
+    for (let i = 0; i < 10; i++){
+    testTree.insert(100 + i * 10);
+    }
+
+    console.log('is balanced: ' + testTree.isBalanced());
+
+    testTree.root = Tree.rebalance(testTree);
+
+    console.log(testTree.isBalanced());
+    console.log('pre: ' + testTree.preorder());
+    console.log('in: ' + testTree.inorder());
+    console.log('post: ' + testTree.postorder());
+
+}
 
