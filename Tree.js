@@ -56,9 +56,34 @@ class Tree {
 
     }
 
+    delete(value) {
+        this.root = this.delete(value, this.root);
+    }
 
-    _delete(value, current = this.root) {
 
+    delete(value, root) {
+
+        if (root === null) { //if tree is empty or value not found
+            return root;
+        } else if (value < root.data) {
+            root.left = this.delete(value, root.left); //search lesser
+        } else if (value > root.data) {
+            root.right = this.delete(value, root.right); //search greater
+        } else {
+            if (root.left === null && root.right === null) { // no child
+                root = null;
+            } else if (root.left === null) { //one child
+                root = root.right;
+            } else if (root.right === null) { // one child
+                root = root.left;
+            } else { //two child
+                const temp = this.findMin(root.right);
+                root.data = temp.data;
+                root.right = this.delete(temp.data, root.right);
+                
+            }
+        }
+        return root;
     }
 
     findMin(current) {
@@ -103,9 +128,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     }
 }
 
-const testTree = new Tree([2, 3]);
-
-testTree._delete(3);
+const testTree = new Tree([1, 2,3,4,5]);
 
 prettyPrint(testTree.root);
 
