@@ -93,6 +93,46 @@ class Tree {
             return this.findMin(current.left);
         }
     }
+
+    levelOrder(cb) {
+
+        if (this.root === null) {
+            return;
+        }
+        if (!cb) {
+            return this._levelOrder([this.root], []);
+        } else {
+            this._levelOrder([this.root], cb);
+        }
+    }
+
+ 
+    _levelOrder(queue, cb) {
+
+        if (queue.length > 0) {
+
+            const root = queue.shift();
+
+            if (Array.isArray(cb)) {
+                cb.push(root.data);
+            } else {
+                cb(root);
+            }
+
+            if (root.left !== null) {
+                queue.push(root.left);
+            }
+
+            if (root.right !== null) {
+                queue.push(root.right);
+            }
+
+            this._levelOrder(queue, cb);
+        }
+        return cb;
+    }
+
+
 }
 
 function buildTree(array) {
