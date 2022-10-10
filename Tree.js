@@ -133,20 +133,13 @@ class Tree {
         return cb;
     }
 
-    inorder(root) {
-
-        
-    }
-
+ 
     preorder(cb) {
-        if (this.root === null) {
-            return;
-        }
+
         if (!cb) {
             return this._preorder(this.root, []);
-        } else {
-            this._preorder(this.root, cb);
         }
+        this._preorder(this.root, cb);
     }
 
     _preorder(root, cb) {
@@ -164,7 +157,54 @@ class Tree {
         
     }
 
-    postorder() {
+    inorder(cb) {
+
+        if (!cb) {
+            return this._inorder(this.root, []);
+        }
+        return this._inorder(this.root, cb);
+
+    }
+
+    _inorder(root, cb) {
+        if (root === null) {
+            return;
+        }
+
+        this._inorder(root.left, cb);
+        if (Array.isArray(cb)) {
+            cb.push(root.data);
+        } else {
+            cb(root);
+        }
+        this._inorder(root.right, cb);
+
+        return cb;
+
+    }
+
+    postorder(cb) {
+        if (!cb) {
+            return this._postorder(this.root, []);
+        } 
+        return this._postorder(this.root, cb)
+    }
+
+
+    _postorder(root, cb) {
+        if (root === null) {
+            return;
+        }
+
+        this._postorder(root.left, cb);
+        this._postorder(root.right, cb);
+        if (Array.isArray(cb)) {
+            cb.push(root.data); 
+        } else {
+            cb(root);
+        }
+
+        return cb;
 
     }
 
@@ -205,8 +245,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 const testTree = new Tree([1, 3, 4, 5, 8, 2]);
-
-console.log(testTree.preorder());
 
 prettyPrint(testTree.root);
 
