@@ -99,6 +99,7 @@ class Tree {
         if (this.root === null) {
             return;
         }
+
         if (!cb) {
             return this._levelOrder([this.root], []);
         } else {
@@ -130,6 +131,41 @@ class Tree {
             this._levelOrder(queue, cb);
         }
         return cb;
+    }
+
+    inorder(root) {
+
+        
+    }
+
+    preorder(cb) {
+        if (this.root === null) {
+            return;
+        }
+        if (!cb) {
+            return this._preorder(this.root, []);
+        } else {
+            this._preorder(this.root, cb);
+        }
+    }
+
+    _preorder(root, cb) {
+        if (root === null) {
+            return;
+        }
+        if (Array.isArray(cb)) {
+            cb.push(root.data);
+        } else {
+            cb(root);
+        }
+        this._preorder(root.left, cb);
+        this._preorder(root.right, cb);
+        return cb;
+        
+    }
+
+    postorder() {
+
     }
 
 
@@ -168,7 +204,9 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     }
 }
 
-const testTree = new Tree([1, 2,3,4,5]);
+const testTree = new Tree([1, 3, 4, 5, 8, 2]);
+
+console.log(testTree.preorder());
 
 prettyPrint(testTree.root);
 
